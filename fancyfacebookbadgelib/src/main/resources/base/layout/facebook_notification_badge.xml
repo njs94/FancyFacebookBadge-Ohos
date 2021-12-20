@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StackLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_content"
+    ohos:width="match_content"
+    ohos:orientation="vertical"
+    ohos:visibility="invisible"
+    ohos:id="$+id:fl_container">
+
+    <DirectionalLayout
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:left_padding="3vp"
+        ohos:right_padding="5vp"
+        ohos:top_padding="2vp"
+        ohos:bottom_padding="2vp">
+
+        <Image
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:id="$+id:iv_badge_bg"
+            ohos:bottom_margin="2vp"
+            ohos:image_src="$media:likeimg"/>
+
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:id="$+id:tv_badge_text"
+            ohos:text_size="20vp"
+            ohos:text_color="#FFF50418"/>
+
+    </DirectionalLayout>
+
+</StackLayout>
