@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.shashank.sony.fancyfacebookbadgelib;
 
 import ohos.agp.components.AttrSet;
@@ -22,6 +23,10 @@ import ohos.agp.utils.Color;
  *
  */
 public class TypedAttrUtil {
+
+    private TypedAttrUtil() {
+        //doNothing
+    }
     /**
      * To fetch the Color from String.
      *

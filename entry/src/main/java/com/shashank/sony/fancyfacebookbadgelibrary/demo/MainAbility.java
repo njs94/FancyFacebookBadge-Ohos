@@ -16,9 +16,10 @@
 
 package com.shashank.sony.fancyfacebookbadgelibrary.demo;
 
-import com.shashank.sony.fancyfacebookbadgelibrary.demo.slice.MainAbilitySlice;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
+import com.shashank.sony.fancyfacebookbadgelibrary.demo.slice.MainAbilitySlice;
+
 
 /**
  * MainAbility that routes to the required slice.

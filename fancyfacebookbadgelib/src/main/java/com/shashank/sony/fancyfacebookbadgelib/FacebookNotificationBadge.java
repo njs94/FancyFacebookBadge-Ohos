@@ -2,8 +2,8 @@ package com.shashank.sony.fancyfacebookbadgelib;
 
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorProperty;
-import ohos.agp.components.ComponentContainer;
 import ohos.agp.components.AttrSet;
+import ohos.agp.components.ComponentContainer;
 import ohos.agp.components.Image;
 import ohos.agp.components.LayoutScatter;
 import ohos.agp.components.StackLayout;
