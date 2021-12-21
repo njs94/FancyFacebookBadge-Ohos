@@ -15,7 +15,8 @@
     "deviceType": [
       "phone",
       "tablet",
-      "wearable"
+      "wearable",
+      "tv"
     ],
     "distro": {
       "deliveryWithInstall": true,

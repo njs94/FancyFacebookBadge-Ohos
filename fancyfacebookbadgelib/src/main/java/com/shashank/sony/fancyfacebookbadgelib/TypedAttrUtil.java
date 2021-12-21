@@ -12,24 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.shashank.sony.fancyfacebookbadgelib;
 
 import ohos.agp.components.AttrSet;
 import ohos.agp.utils.Color;
 
 /**
- * AttrSet utilset class
- *
+ * For fetching xml data
  */
 public class TypedAttrUtil {
-    /**
-     * To fetch the Color from String
-     *
-     * @param attrs AttrSet
-     * @param attrName String Value to be validated
-     * @param defValue Default Value
-     * @return Custom Color Value as return
-     */
+
+    private TypedAttrUtil() {
+        //doNothing
+    }
+
     public static int getIntColor(AttrSet attrs, String attrName, int defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getColorValue().getValue();
@@ -38,14 +35,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * To get the Integer Value of Color type
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return Custom Color Int Value as return
-     */
     public static int getColor(AttrSet attrs, String attrName, Color defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getColorValue().getValue();
@@ -54,14 +43,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * To validate the Boolean field
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return returns the boolean value
-     */
     public static boolean getBoolean(AttrSet attrs, String attrName, boolean defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getBoolValue();
@@ -70,14 +51,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * To fetch the string field
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return returns the string value of the field
-     */
     public static String getString(AttrSet attrs, String attrName, String defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getStringValue();
@@ -86,14 +59,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * Validate the customized dimension value in integer pixel values
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return Returns the customized int value
-     */
     public static int getDimensionPixelSize(AttrSet attrs, String attrName, int defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getDimensionValue();
@@ -102,14 +67,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * Validate the customized Integer value
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return Returns the customized Integer value
-     */
     public static int getInteger(AttrSet attrs, String attrName, int defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getIntegerValue();
@@ -118,14 +75,6 @@ public class TypedAttrUtil {
         }
     }
 
-    /**
-     * Validate the customized Floating value
-     *
-     * @param attrs AttrSet
-     * @param attrName attrName
-     * @param defValue Default Value
-     * @return Returns the customized float value
-     */
     public static float getFloat(AttrSet attrs, String attrName, float defValue) {
         if (attrs.getAttr(attrName) != null && attrs.getAttr(attrName).isPresent()) {
             return attrs.getAttr(attrName).get().getFloatValue();

@@ -28,7 +28,7 @@ mBadge.setEmoji(Emoji.HAHA); //You can also set Emoji.LIKE, Emoji.WOW etc
 
 ```
 
-#Integration
+# Integration
 
 1. For using fancyfacebookbadgelib module in sample, include the source code and below dependency in entry/build.gradle to generate hap file.
         
