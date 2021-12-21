@@ -17,12 +17,11 @@
 package com.shashank.sony.fancyfacebookbadgelibrary.demo;
 
 import com.shashank.sony.fancyfacebookbadgelibrary.demo.slice.MainAbilitySlice;
-
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
 
 /**
- * MainAbility that routes to the required slice
+ * MainAbility that routes to the required slice.
  */
 public class MainAbility extends Ability {
     @Override

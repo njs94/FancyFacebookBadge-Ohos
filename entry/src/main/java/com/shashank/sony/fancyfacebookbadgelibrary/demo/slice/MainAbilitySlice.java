@@ -19,14 +19,13 @@ package com.shashank.sony.fancyfacebookbadgelibrary.demo.slice;
 import com.shashank.sony.fancyfacebookbadgelib.Emoji;
 import com.shashank.sony.fancyfacebookbadgelib.FacebookNotificationBadge;
 import com.shashank.sony.fancyfacebookbadgelibrary.demo.ResourceTable;
-
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
 import ohos.agp.components.Component;
 
 /**
- * MainAbility Slice first class to be invoked
+ * MainAbility Slice first class to be invoked.
  */
 public class MainAbilitySlice extends AbilitySlice {
 

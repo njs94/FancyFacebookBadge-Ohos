@@ -19,7 +19,7 @@ package com.shashank.sony.fancyfacebookbadgelibrary.demo;
 import ohos.aafwk.ability.AbilityPackage;
 
 /**
- * Application Class
+ * Application Class.
  */
 public class MyApplication extends AbilityPackage {
     @Override

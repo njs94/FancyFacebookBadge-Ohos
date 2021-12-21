@@ -3,10 +3,10 @@ package com.shashank.sony.fancyfacebookbadgelib;
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorProperty;
 import ohos.agp.components.ComponentContainer;
+import ohos.agp.components.AttrSet;
 import ohos.agp.components.Image;
 import ohos.agp.components.LayoutScatter;
 import ohos.agp.components.StackLayout;
-import ohos.agp.components.AttrSet;
 import ohos.agp.components.Text;
 import ohos.agp.utils.Color;
 import ohos.app.Context;
@@ -18,7 +18,7 @@ import ohos.global.resource.solidxml.TypedAttribute;
 import java.io.IOException;
 
 /**
- * Main class for facebook Notification badge
+ * Main class for facebook Notification badge.
  */
 public class FacebookNotificationBadge extends StackLayout {
     private static final int DEFAULT_TEXT_COLOR = Color.getIntColor("#3F51B5");
@@ -44,7 +44,8 @@ public class FacebookNotificationBadge extends StackLayout {
     private String mEllipsizeText = DEFAULT_MAX_LENGTH_REACHED_TEXT;
 
     /**
-     * FacebookNotificationBadge constructor
+     * FacebookNotificationBadge constructor.
+     *
      * @param context current context
      * @param attrs xml attrs
      */
