@@ -27,6 +27,7 @@ public class TypedAttrUtil {
     private TypedAttrUtil() {
         //doNothing
     }
+    
     /**
      * To fetch the Color from String.
      *
