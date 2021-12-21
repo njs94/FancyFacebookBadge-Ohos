@@ -1,71 +1,66 @@
 package com.shashank.sony.fancyfacebookbadgelib;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
+import ohos.agp.animation.Animator;
+import ohos.agp.animation.AnimatorProperty;
+import ohos.agp.components.*;
+import ohos.agp.utils.Color;
+import ohos.app.Context;
+import ohos.global.resource.NotExistException;
+import ohos.global.resource.WrongTypeException;
+import ohos.global.resource.solidxml.TypedAttribute;
 
-public class FacebookNotificationBadge extends FrameLayout {
-    private static final int DEFAULT_TEXT_COLOR = Color.parseColor("#3F51B5");
-    private static final int DEFAULT_TEXT_SIZE = 16;
+import java.io.IOException;
+
+public class FacebookNotificationBadge extends StackLayout {
+    private static final int DEFAULT_TEXT_COLOR = Color.getIntColor("#3F51B5");
+    private static final int DEFAULT_TEXT_SIZE = 24;
     private static final boolean DEFAULT_ANIMATION_ENABLED = true;
     private static final int DEFAULT_ANIMATION_DURATION = 500;
     private static final int DEFAULT_MAX_TEXT_LENGTH = 2;
     private static final String DEFAULT_MAX_LENGTH_REACHED_TEXT = "...";
 
-    private FrameLayout mContainer;
-    private ImageView mIvBadgeBg;
-    private TextView mTvBadgeText;
+    private StackLayout mContainer;
+    private Image mIvBadgeBg;
+    private Text mTvBadgeText;
     private int mBadgeTextColor = DEFAULT_TEXT_COLOR;
     private float mBadgeTextSize = dpToPx(DEFAULT_TEXT_SIZE);
     private int mAnimationDuration = DEFAULT_ANIMATION_DURATION;
-    private Animation mUpdate;
-    private Animation mShow;
-    private Animation mHide;
+    private AnimatorProperty mUpdate;
+    private AnimatorProperty mShow;
+    private AnimatorProperty mHide;
     private String mBadgeText;
     private boolean mIsBadgeShown;
     private boolean mAnimationEnabled = DEFAULT_ANIMATION_ENABLED;
     private int mMaxTextLength = DEFAULT_MAX_TEXT_LENGTH;
     private String mEllipsizeText = DEFAULT_MAX_LENGTH_REACHED_TEXT;
 
-    public FacebookNotificationBadge(Context context, AttributeSet attrs) {
+    public FacebookNotificationBadge(Context context, AttrSet attrs) {
         super(context, attrs);
 
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.facebook_notification_badge, this, true);
-        mContainer = (FrameLayout) findViewById(R.id.fl_container);
-        mIvBadgeBg = (ImageView) findViewById(R.id.iv_badge_bg);
-        mTvBadgeText = (TextView) findViewById(R.id.tv_badge_text);
+        ComponentContainer componentContainer = (ComponentContainer) LayoutScatter.getInstance(context).parse(ResourceTable.Layout_facebook_notification_badge, this, true);
 
-        TypedArray a = context.getTheme().obtainStyledAttributes(
-                attrs, R.styleable.NotificationBadge, 0, 0);
+        mContainer = (StackLayout) componentContainer.findComponentById(ResourceTable.Id_fl_container);
+        mIvBadgeBg = (Image) componentContainer.findComponentById(ResourceTable.Id_iv_badge_bg);
+        mTvBadgeText = (Text) componentContainer.findComponentById(ResourceTable.Id_tv_badge_text);
+
         try {
-            mBadgeTextColor = a.getColor(R.styleable.NotificationBadge_nbTextColor, DEFAULT_TEXT_COLOR);
-            mTvBadgeText.setTextColor(mBadgeTextColor);
+            mBadgeTextColor = TypedAttrUtil.getColor(attrs, "nbTextColor", new Color(DEFAULT_TEXT_COLOR));
+            mTvBadgeText.setTextColor(new Color(mBadgeTextColor));
 
-            mBadgeTextSize = a.getDimensionPixelSize(R.styleable.NotificationBadge_nbTextSize, (int)dpToPx(DEFAULT_TEXT_SIZE));
-            mTvBadgeText.setTextSize(TypedValue.COMPLEX_UNIT_PX, mBadgeTextSize);
+            mBadgeTextSize = context.getResourceManager().getElement((int)dpToPx(DEFAULT_TEXT_SIZE)).getInteger();
+            mTvBadgeText.setTextSize((int) mBadgeTextSize, Text.TextSizeType.PX);
 
-            mAnimationEnabled = a.getBoolean(R.styleable.NotificationBadge_nbAnimationEnabled, DEFAULT_ANIMATION_ENABLED);
+            mAnimationEnabled = TypedAttrUtil.getBoolean(attrs,"nbAnimationEnabled", DEFAULT_ANIMATION_ENABLED);
 
-            mAnimationDuration = a.getInt(R.styleable.NotificationBadge_nbAnimationDuration, DEFAULT_ANIMATION_DURATION);
+            mAnimationDuration = TypedAttrUtil.getInteger(attrs, "nbAnimationDuration", DEFAULT_ANIMATION_DURATION);
 
-            mMaxTextLength = a.getInt(R.styleable.NotificationBadge_nbMaxTextLength, DEFAULT_MAX_TEXT_LENGTH);
-            mEllipsizeText = a.getString(R.styleable.NotificationBadge_nbEllipsizeText);
+            mMaxTextLength = TypedAttrUtil.getInteger(attrs, "nbMaxTextLength", DEFAULT_MAX_TEXT_LENGTH);
+            mEllipsizeText = TypedAttrUtil.getString(attrs, "nbEllipsizeText", DEFAULT_MAX_LENGTH_REACHED_TEXT);
             if (mEllipsizeText == null) {
                 mEllipsizeText = DEFAULT_MAX_LENGTH_REACHED_TEXT;
             }
-        } finally {
-            a.recycle();
+        } catch (NotExistException | WrongTypeException | IOException e) {
+            e.printStackTrace();
         }
 
         if (mAnimationEnabled) {
@@ -76,7 +71,7 @@ public class FacebookNotificationBadge extends FrameLayout {
     public void clear() {
         if (mIsBadgeShown) {
             if (mAnimationEnabled) {
-                mContainer.startAnimation(mHide);
+                mHide.start();
             } else {
                 mContainer.setVisibility(INVISIBLE);
             }
@@ -88,7 +83,7 @@ public class FacebookNotificationBadge extends FrameLayout {
         mBadgeText = text;
         if (!mIsBadgeShown) {
             if (mAnimationEnabled) {
-                mContainer.startAnimation(mShow);
+                mShow.start();;
             } else {
                 mContainer.setVisibility(VISIBLE);
                 mTvBadgeText.setText(text);
@@ -111,17 +106,17 @@ public class FacebookNotificationBadge extends FrameLayout {
     }
     public void setEmoji(Emoji emoji){
         if(emoji==Emoji.ANGRY)
-        mIvBadgeBg.setImageResource(R.drawable.angryimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_angryimg);
         else if(emoji==Emoji.HAHA)
-        mIvBadgeBg.setImageResource(R.drawable.hahaimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_hahaimg);
         else if(emoji==Emoji.LIKE)
-        mIvBadgeBg.setImageResource(R.drawable.likeimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_likeimg);
         else if(emoji==Emoji.LOVE)
-        mIvBadgeBg.setImageResource(R.drawable.loveimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_loveimg);
         else if(emoji==Emoji.SAD)
-        mIvBadgeBg.setImageResource(R.drawable.sadimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_sadimg);
         else if(emoji==Emoji.WOW)
-        mIvBadgeBg.setImageResource(R.drawable.wowimg);
+        mIvBadgeBg.setPixelMap(ResourceTable.Media_wowimg);
     }
 
     public void setMaxTextLength(int maxLength) {
@@ -139,7 +134,7 @@ public class FacebookNotificationBadge extends FrameLayout {
         } else {
             if (mIsBadgeShown) {
                 if (mAnimationEnabled) {
-                    mContainer.startAnimation(mUpdate);
+                    mUpdate.start();
                 } else {
                     mTvBadgeText.setText(mBadgeText);
                 }
@@ -163,60 +158,118 @@ public class FacebookNotificationBadge extends FrameLayout {
 
     public void setTextColor(int textColor) {
         mBadgeTextColor = textColor;
-        mTvBadgeText.setTextColor(mBadgeTextColor);
+        mTvBadgeText.setTextColor(new Color(mBadgeTextColor));
     }
 
 
     private void initUpdateAnimation() {
-        mUpdate = new ScaleAnimation(1, 0.8f, 1, 0.8f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mUpdate.setDuration(mAnimationDuration / 2);
-        mUpdate.setRepeatMode(Animation.REVERSE);
-        mUpdate.setRepeatCount(1);
-        mUpdate.setAnimationListener(new Animation.AnimationListener() {
+
+        mUpdate = new AnimatorProperty(mContainer);
+        mUpdate.scaleXFrom(1).scaleX(0.8f).scaleYFrom(1).scaleY(0.8f).alpha(1).setDuration(mAnimationDuration / 2);
+        mUpdate.setLoopedCount(1);
+        mUpdate.setStateChangedListener(new Animator.StateChangedListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void onStart(Animator animator) {
                 mTvBadgeText.setText(mBadgeText);
             }
+
             @Override
-            public void onAnimationEnd(Animation animation) {}
+            public void onStop(Animator animator) {
+
+            }
+
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onEnd(Animator animator) {
+
+            }
+
+            @Override
+            public void onPause(Animator animator) {
+
+            }
+
+            @Override
+            public void onResume(Animator animator) {
+
+            }
         });
 
-        mShow = new ScaleAnimation(0, 1, 0, 1,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mShow.setDuration(mAnimationDuration / 2);
-        mShow.setAnimationListener(new Animation.AnimationListener() {
+        mShow = new AnimatorProperty(mContainer);
+        mShow.scaleXFrom(0).scaleX(1).scaleYFrom(0).scaleY(1).alpha(1).setDuration(mAnimationDuration / 2);
+        mShow.setStateChangedListener(new Animator.StateChangedListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void onStart(Animator animator) {
                 mContainer.setVisibility(VISIBLE);
                 mTvBadgeText.setText(mBadgeText);
             }
+
             @Override
-            public void onAnimationEnd(Animation animation) {}
+            public void onStop(Animator animator) {
+
+            }
+
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onEnd(Animator animator) {
+
+            }
+
+            @Override
+            public void onPause(Animator animator) {
+
+            }
+
+            @Override
+            public void onResume(Animator animator) {
+
+            }
         });
 
-        mHide = new ScaleAnimation(1, 0, 1, 0,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        mHide.setDuration(mAnimationDuration / 2);
-        mHide.setAnimationListener(new Animation.AnimationListener() {
+
+        mHide = new AnimatorProperty(mContainer);
+        mHide.scaleXFrom(1).scaleX(0).scaleYFrom(1).scaleY(0).alpha(1).setDuration(mAnimationDuration / 2);
+        mHide.setStateChangedListener(new Animator.StateChangedListener() {
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onStart(Animator animator) {
+            }
+
             @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onStop(Animator animator) {
                 mContainer.setVisibility(INVISIBLE);
             }
+
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onEnd(Animator animator) {
+
+            }
+
+            @Override
+            public void onPause(Animator animator) {
+
+            }
+
+            @Override
+            public void onResume(Animator animator) {
+
+            }
         });
     }
 
     private float dpToPx(float dp){
-        return TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
+        return TypedAttribute.computeTranslateRatio(getContext().getApplicationContext().getResourceManager().getDeviceCapability());
     }
-
 }

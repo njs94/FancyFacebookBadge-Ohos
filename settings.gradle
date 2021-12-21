@@ -1,1 +1,1 @@
-include ':app', ':fancyfacebookbadgelib'
+include ':entry', ':fancyfacebookbadgelib'

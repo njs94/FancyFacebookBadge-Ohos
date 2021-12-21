@@ -1,0 +1,48 @@
+{
+  "app": {
+    "bundleName": "com.shashank.sony.fancyfacebookbadgelibrary.demo",
+    "vendor": "shashank",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {},
+  "module": {
+    "package": "com.shashank.sony.fancyfacebookbadgelibrary.demo",
+    "name": ".MyApplication",
+    "mainAbility": "com.shashank.sony.fancyfacebookbadgelibrary.demo.MainAbility",
+    "deviceType": [
+      "phone",
+      "tablet",
+      "wearable"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "entry",
+      "moduleType": "entry",
+      "installationFree": false
+    },
+    "abilities": [
+      {
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "orientation": "unspecified",
+        "name": "com.shashank.sony.fancyfacebookbadgelibrary.demo.MainAbility",
+        "icon": "$media:icon",
+        "description": "$string:mainability_description",
+        "label": "$string:entry_MainAbility",
+        "type": "page",
+        "launchType": "standard"
+      }
+    ]
+  }
+}
