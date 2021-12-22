@@ -35,17 +35,30 @@ public class MainAbilitySlice extends AbilitySlice implements Component.ClickedL
     private int wowCount = 0;
     private int angryCount = 0;
     private int likeCount = 0;
-    FacebookNotificationBadge hahaBadge = null;
-    FacebookNotificationBadge sadBadge = null;
-    FacebookNotificationBadge angryBadge = null;
-    FacebookNotificationBadge wowBadge = null;
-    FacebookNotificationBadge loveBadge = null;
-    FacebookNotificationBadge likeBadge = null;
+
+    private FacebookNotificationBadge hahaBadge = null;
+    private FacebookNotificationBadge sadBadge = null;
+    private FacebookNotificationBadge angryBadge = null;
+    private FacebookNotificationBadge wowBadge = null;
+    private FacebookNotificationBadge loveBadge = null;
+    private FacebookNotificationBadge likeBadge = null;
+
+    private Button hahaButton;
+    private Button sadButton;
+    private Button angryButton;
+    private Button likeButton;
+    private Button loveButton;
+    private Button wowButton;
+    private Button resetButton;
+
 
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_main);
+
+        buttonInit();
+        buttonListeners();
 
         hahaBadge = (FacebookNotificationBadge) findComponentById(ResourceTable.Id_hahabadge);
         sadBadge = (FacebookNotificationBadge) findComponentById(ResourceTable.Id_sadbadge);
@@ -59,6 +72,28 @@ public class MainAbilitySlice extends AbilitySlice implements Component.ClickedL
         wowBadge.setEmoji(Emoji.WOW);
         sadBadge.setEmoji(Emoji.SAD);
         angryBadge.setEmoji(Emoji.ANGRY);
+
+    }
+
+    private void buttonInit() {
+        hahaButton = (Button) findComponentById(ResourceTable.Id_reacthaha);
+        sadButton = (Button) findComponentById(ResourceTable.Id_reactsad);
+        angryButton = (Button) findComponentById(ResourceTable.Id_reactangry);
+        loveButton = (Button) findComponentById(ResourceTable.Id_reactlove);
+        likeButton = (Button) findComponentById(ResourceTable.Id_reactlike);
+        wowButton = (Button) findComponentById(ResourceTable.Id_reactwow);
+        resetButton = (Button) findComponentById(ResourceTable.Id_reset);
+    }
+
+    private void buttonListeners() {
+        hahaButton.setClickedListener(this);
+        sadButton.setClickedListener(this);
+        angryButton.setClickedListener(this);
+        loveButton.setClickedListener(this);
+        likeButton.setClickedListener(this);
+        wowButton.setClickedListener(this);
+        resetButton.setClickedListener(this);
+
     }
 
     @Override
