@@ -72,7 +72,6 @@ public class MainAbilitySlice extends AbilitySlice implements Component.ClickedL
         wowBadge.setEmoji(Emoji.WOW);
         sadBadge.setEmoji(Emoji.SAD);
         angryBadge.setEmoji(Emoji.ANGRY);
-
     }
 
     private void buttonInit() {
@@ -93,33 +92,32 @@ public class MainAbilitySlice extends AbilitySlice implements Component.ClickedL
         likeButton.setClickedListener(this);
         wowButton.setClickedListener(this);
         resetButton.setClickedListener(this);
-
     }
 
     @Override
     public void onClick(Component component) {
         switch (component.getId()) {
-            case ResourceTable.Id_hahabadge:
+            case ResourceTable.Id_reacthaha:
                 hahaCount++;
                 hahaBadge.setNumber(hahaCount);
                 break;
-            case ResourceTable.Id_sadbadge:
+            case ResourceTable.Id_reactsad:
                 sadCount++;
                 sadBadge.setNumber(sadCount);
                 break;
-            case ResourceTable.Id_angrybadge:
+            case ResourceTable.Id_reactangry:
                 angryCount++;
                 angryBadge.setNumber(angryCount);
                 break;
-            case ResourceTable.Id_wowbadge:
+            case ResourceTable.Id_reactwow:
                 wowCount++;
                 wowBadge.setNumber(wowCount);
                 break;
-            case ResourceTable.Id_likebadge:
+            case ResourceTable.Id_reactlike:
                 likeCount++;
                 likeBadge.setNumber(likeCount);
                 break;
-            case ResourceTable.Id_lovebadge:
+            case ResourceTable.Id_reactlove:
                 loveCount++;
                 loveBadge.setNumber(loveCount);
                 break;
@@ -130,7 +128,7 @@ public class MainAbilitySlice extends AbilitySlice implements Component.ClickedL
                 likeBadge.setNumber(likeCount);
                 wowBadge.setNumber(wowCount);
                 sadBadge.setNumber(sadCount);
-                hahaBadge.setNumber(hahaCount);
+                angryBadge.setNumber(angryCount);
                 break;
         }
     }
